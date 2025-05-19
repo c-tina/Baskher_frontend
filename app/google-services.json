@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "582426085774",
+    "project_id": "baskher-6f827",
+    "storage_bucket": "baskher-6f827.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582426085774:android:fc41d013a84b1dca403cdf",
+        "android_client_info": {
+          "package_name": "com.example.baskher_frontend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDT0IPEk6fw6IneftwcZ_4BmPLVjZ7E1IE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
