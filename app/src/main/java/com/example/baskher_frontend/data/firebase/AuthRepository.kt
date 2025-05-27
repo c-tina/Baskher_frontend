@@ -1,4 +1,4 @@
-package com.example.baskher_frontend.ui.login.domain
+package com.example.baskher_frontend.data.firebase
 
 interface AuthRepository {
     suspend fun login(email: String, password: String): Result<Unit>

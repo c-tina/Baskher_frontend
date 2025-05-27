@@ -1,4 +1,4 @@
-package com.example.baskher_frontend.ui.login.ui
+package com.example.baskher_frontend.ui.login
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -37,7 +37,7 @@ import com.example.baskher_frontend.ui.theme.UnselectedField
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
-fun SignUpScreen(auth: FirebaseAuth) {
+fun LoginScreen(auth: FirebaseAuth, onLoginSuccess: () -> Unit) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -70,8 +70,11 @@ fun SignUpScreen(auth: FirebaseAuth) {
             onValueChange = { email = it },
             shape = RoundedCornerShape(16.dp),
             modifier = Modifier
-                .fillMaxWidth()
-                .height(40.dp),
+                .fillMaxWidth(),
+            textStyle = androidx.compose.ui.text.TextStyle(
+                color = White,
+                fontSize = 16.sp
+            ),
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = UnselectedField,
                 focusedContainerColor = SelectedField
@@ -86,8 +89,11 @@ fun SignUpScreen(auth: FirebaseAuth) {
             value = password, onValueChange = { password = it },
             shape = RoundedCornerShape(16.dp),
             modifier = Modifier
-                .fillMaxWidth()
-                .height(40.dp),
+                .fillMaxWidth(),
+            textStyle = androidx.compose.ui.text.TextStyle(
+                color = White,
+                fontSize = 16.sp
+            ),
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = UnselectedField,
                 focusedContainerColor = SelectedField
@@ -96,24 +102,23 @@ fun SignUpScreen(auth: FirebaseAuth) {
         Spacer(Modifier.height(48.dp))
         Button(
             onClick = {
-                  auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{ task ->
-                      if(task.isSuccessful){
-                          // Registrado
-                          Log.i("aris", "LOGIN OK")
-                      }else{
-                          //Error
-                          Log.i("aris", "LOGIN KO")
-                      }
-                  }
+                auth.signInWithEmailAndPassword(email, password).addOnCompleteListener{ task ->
+                    if(task.isSuccessful){
+                        onLoginSuccess()
+                    }else{
+                        //Error
+                        Log.i("error", "LOGIN KO")
+                    }
+                }
             },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
                 .padding(horizontal = 32.dp),
             colors = ButtonDefaults.buttonColors(containerColor = PurpleBack)) {
-            Text(text = "Regístrate")
+            Text(text = "Iniciar sesión")
 
         }
     }
-
 }
+

@@ -1,4 +1,4 @@
-package com.example.baskher_frontend.ui.login.ui
+package com.example.baskher_frontend.ui.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -67,7 +67,7 @@ fun InitialScreen(navigateToLogin:() -> Unit = {}, navigateToSignUp:() -> Unit =
                .height(48.dp)
                .padding(horizontal = 32.dp),
            colors = ButtonDefaults.buttonColors(containerColor = PurpleBack)) {
-           Text(text = "Iniciar sesión")
+           Text(text = "Inicia sesión")
        }
 
        Text (

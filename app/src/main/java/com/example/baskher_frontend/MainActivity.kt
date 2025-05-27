@@ -10,6 +10,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.baskher_frontend.core.NavigationWrapper
 import com.example.baskher_frontend.ui.theme.Baskher_frontendTheme
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -43,6 +44,7 @@ class MainActivity : ComponentActivity() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             //navegar a la home
+
         }
     }
 }

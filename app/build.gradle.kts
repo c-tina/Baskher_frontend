@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.googleServices)
     alias(libs.plugins.crashlytics)
+    alias(libs.plugins.compose.compiler)
+    kotlin("kapt")
 }
 
 android {
@@ -52,10 +54,28 @@ android {
 }
 
 dependencies {
+    // Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.auth)
 
+    // Retrofit
+    implementation (libs.retrofit)
+    implementation (libs.retrofit2.kotlin.coroutines.adapter)
+    implementation (libs.converter.gson)
+
+    // Coil
+    implementation(libs.coil.compose)
+
+    // Glide
+    implementation(libs.glide)
+    implementation(libs.glide.compose)
+
+    // OkHttp
+    implementation (libs.okhttp)
+
+    // Serialization
+    implementation (libs.kotlinx.serialization.json)
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)
@@ -73,4 +93,5 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.androidx.runtime.livedata)
 }

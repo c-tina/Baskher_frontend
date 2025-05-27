@@ -1,6 +1,5 @@
-package com.example.baskher_frontend.ui.login.data
+package com.example.baskher_frontend.data.firebase
 
-import com.example.baskher_frontend.ui.login.domain.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
 
