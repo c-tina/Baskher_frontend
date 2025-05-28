@@ -1,14 +1,6 @@
 package com.example.baskher_frontend.core
 
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -27,10 +19,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun NavigationWrapper(navHostController: NavHostController, auth: FirebaseAuth){
-
-    val navController = rememberNavController()
-
-    val context = LocalContext.current
 
     val baskherRepository = BaskherRepository(
         baskherApiService = RetrofitInstance.baskherApiService,
@@ -83,7 +71,8 @@ fun NavigationWrapper(navHostController: NavHostController, auth: FirebaseAuth){
             id?.let {
                 JugadoraDetailScreen(
                     jugadoraId = it,
-                    viewModel = viewModel
+                    viewModel = viewModel,
+                    onBackClick = { navHostController.navigateUp() }
                 )
             }
         }

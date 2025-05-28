@@ -127,6 +127,8 @@ fun ContentScreen(modifier: Modifier = Modifier, selectedIndex : Int,
             navigateToDetail = navigateToDetail,
             viewModel = viewModel
         )
-        2-> CompareScreen()
+        2-> CompareScreen(
+            viewModel = viewModel
+        )
     }
 }

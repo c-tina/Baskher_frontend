@@ -41,7 +41,6 @@ import androidx.compose.ui.unit.sp
 import com.example.baskher_frontend.R
 import com.example.baskher_frontend.ui.components.JugadoraListStatistics
 import com.example.baskher_frontend.ui.theme.PurpleBack
-import com.example.baskher_frontend.ui.theme.PurpleMedium
 import com.example.baskher_frontend.ui.viewmodels.JugadoraViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -108,7 +107,7 @@ fun StatisticsScreen(
 
         Box(
             modifier = Modifier
-                .fillMaxWidth(0.45f),
+                .fillMaxWidth(0.50f),
         ) {
             ExposedDropdownMenuBox(
                 expanded = expanded,

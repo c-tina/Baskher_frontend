@@ -1,29 +1,30 @@
 package com.example.baskher_frontend.ui.screens
 
-import androidx.compose.foundation.Image
+
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
+import com.example.baskher_frontend.R
+import com.example.baskher_frontend.ui.components.JugadoraMainInformation
+import com.example.baskher_frontend.ui.theme.PurpleDark
 import com.example.baskher_frontend.ui.viewmodels.JugadoraViewModel
 
-@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun JugadoraDetailScreen(
     jugadoraId: Int,
-    viewModel: JugadoraViewModel
+    viewModel: JugadoraViewModel,
+    onBackClick: () -> Unit
 ) {
-    LaunchedEffect(jugadoraId) {
-        viewModel.fetchJugadoraById(jugadoraId)
-    }
+
+    viewModel.fetchJugadoraById(jugadoraId)
+
 
     val jugadora = viewModel.jugadora.observeAsState().value
 
@@ -36,31 +37,23 @@ fun JugadoraDetailScreen(
         }
     } else {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
+            modifier = Modifier.verticalScroll(rememberScrollState())
         ) {
-            GlideImage(
-                model = jugadora.imagen,
-                contentDescription = "Imagen de ${jugadora.nombre}",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(300.dp),
-                contentScale = ContentScale.Crop
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = jugadora.nombre,
-                fontSize = 28.sp,
-                fontWeight = FontWeight.Bold
-            )
-            Text(text = "Equipo: ${jugadora.equipo}")
-            Text(text = "Puntos: ${jugadora.puntos_totales}")
-            Text(text = "Asistencias: ${jugadora.asistencias}")
-            Text(text = "Rebotes: ${jugadora.rebotes_totales}")
-            Text(text = "T2: ${jugadora.porcentaje_t2} %")
-            Text(text = "T3: ${jugadora.porcentaje_t3} %")
-            Text(text = "TL: ${jugadora.porcentaje_tl} %")
+            Box {
+                JugadoraMainInformation(jugadora)
+                IconButton(
+                    onClick = { onBackClick() },
+                    modifier = Modifier
+                        .padding(top = 50.dp, start = 10.dp)
+                        .align(Alignment.TopStart)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_back_24),
+                        contentDescription = "Volver",
+                        tint = PurpleDark
+                    )
+                }
+            }
         }
     }
 }

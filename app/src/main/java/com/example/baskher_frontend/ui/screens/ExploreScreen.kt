@@ -1,6 +1,9 @@
 package com.example.baskher_frontend.ui.screens
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -23,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.baskher_frontend.ui.components.JugadorasList
+import com.example.baskher_frontend.ui.theme.PurpleBack
 import com.example.baskher_frontend.ui.viewmodels.JugadoraViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,16 +56,24 @@ fun ExploreScreen(
                 else -> it.sortedBy { it.nombre }
             }
         }
+    Box(
+        modifier = Modifier
+            .background(PurpleBack)
+            .fillMaxWidth()
+            .fillMaxHeight()
+    )
 
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 120.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
+            .padding(top = 110.dp, bottom = 16.dp)
     ) {
         OutlinedTextField(
             value = searchQuery,
             onValueChange = { searchQuery = it },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 10.dp),
             placeholder = { Text("Buscar jugadora...") },
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Buscar") },
             singleLine = true
@@ -72,7 +84,7 @@ fun ExploreScreen(
             onExpandedChange = { expanded = !expanded },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp)
+                .padding(horizontal = 16.dp, vertical = 10.dp),
         ) {
             TextField(
                 value = selectedOption,

@@ -77,6 +77,12 @@ dependencies {
     // Serialization
     implementation (libs.kotlinx.serialization.json)
 
+    // ConstraintLayout
+    implementation (libs.androidx.constraintlayout.compose)
+
+    // MPAndroidChart
+    implementation(libs.mpandroidchart)
+
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

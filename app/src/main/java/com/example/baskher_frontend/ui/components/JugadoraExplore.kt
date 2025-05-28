@@ -55,7 +55,6 @@ fun JugadoraExplore(
         Box(
             modifier = Modifier.fillMaxSize()
         ) {
-            // Imagen que ocupa toda la card
             GlideImage(
                 model = jugadora.imagen,
                 contentDescription = "Imagen de ${jugadora.nombre}",
@@ -83,7 +82,6 @@ fun JugadoraExplore(
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
-                // puedes agregar estilo (fontWeight, fontSize) aquí si quieres
             )
         }
     }
