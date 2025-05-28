@@ -31,15 +31,17 @@ fun BusquedaJugadora(
 ) {
     var searchText by remember { mutableStateOf("") }
     var isFocused by remember { mutableStateOf(false) }
+    var selectedJugadora by remember { mutableStateOf<JugadoraResponse?>(null) }
 
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
 
-    val filteredJugadoras by remember(searchText, jugadoras) {
+    val filteredJugadoras by remember(searchText, jugadoras, selectedJugadora) {
         derivedStateOf {
             if (searchText.length >= 2) {
                 jugadoras.filter {
-                    it.nombre.contains(searchText, ignoreCase = true)
+                    it.nombre.contains(searchText, ignoreCase = true) &&
+                            it != selectedJugadora
                 }.take(5)
             } else emptyList()
         }
@@ -48,7 +50,12 @@ fun BusquedaJugadora(
     Column(modifier = modifier) {
         OutlinedTextField(
             value = searchText,
-            onValueChange = { searchText = it },
+            onValueChange = {
+                searchText = it
+                if (it.isEmpty() || !it.equals(selectedJugadora?.nombre, ignoreCase = true)) {
+                    selectedJugadora = null
+                }
+            },
             label = { Text(label, color = PurpleDark) },
             modifier = Modifier
                 .fillMaxWidth()
@@ -64,7 +71,6 @@ fun BusquedaJugadora(
             singleLine = true
         )
 
-        // Mostramos sugerencias como lista si hay texto y está enfocado
         if (filteredJugadoras.isNotEmpty() && searchText.isNotEmpty()) {
             Column(
                 modifier = Modifier
@@ -76,8 +82,8 @@ fun BusquedaJugadora(
                         text = { Text(jugadora.nombre, color = Color.White) },
                         onClick = {
                             searchText = jugadora.nombre
+                            selectedJugadora = jugadora
                             onJugadoraSeleccionada(jugadora)
-                            // Ocultar sugerencias
                             focusManager.clearFocus()
                         }
                     )

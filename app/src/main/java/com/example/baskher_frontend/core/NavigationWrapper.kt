@@ -5,7 +5,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.baskher_frontend.data.api.BaskherRepository
 import com.example.baskher_frontend.data.api.RetrofitInstance
 import com.example.baskher_frontend.ui.login.InitialScreen
@@ -44,25 +43,31 @@ fun NavigationWrapper(navHostController: NavHostController, auth: FirebaseAuth){
                     navHostController.navigate("mainScreen") {
                         popUpTo("initial") { inclusive = true }
                     }
-                }
+                },
+                navController = navHostController
             )
         }
 
         composable ("signUp") {
-            SignUpScreen(auth,
+            SignUpScreen(
+                auth,
                 onSignUpSuccess = {
                     navHostController.navigate("mainScreen") {
                         popUpTo("initial") { inclusive = true }
                     }
-                }
+                },
+                navController = navHostController
             )
         }
 
         composable("mainScreen") {
-            MainScreen(viewModel = viewModel,
+            MainScreen(
+                viewModel = viewModel,
                 navigateToDetail = { id ->
                     navHostController.navigate("jugadoras/$id")
-                }
+                },
+                navController = navHostController,
+                auth = auth
             )
         }
 

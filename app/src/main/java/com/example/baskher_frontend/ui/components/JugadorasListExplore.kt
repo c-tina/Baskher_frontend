@@ -18,7 +18,6 @@ fun JugadorasList(
     val configuration = LocalConfiguration.current
     val isPortrait = configuration.orientation == android.content.res.Configuration.ORIENTATION_PORTRAIT
 
-    val context = LocalContext.current
     val columns = if (isPortrait) 3 else 6
 
 

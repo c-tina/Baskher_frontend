@@ -18,12 +18,7 @@ class JugadoraViewModel(private val baskherRepository: BaskherRepository) : View
 
     //Detectar en qué pantalla estamos
     private val _currentTitle = MutableLiveData<String?>()
-    val currentTitle: LiveData<String?>
-        get() = _currentTitle
 
-    //Detectar el índice para actualizar el tab seleccionado
-    private val _selectedIndex = MutableLiveData<Int>()
-    val selectedIndex: LiveData<Int> get() = _selectedIndex
 
     // Info de la jugadora seleccionada
     private val _jugadora = MutableLiveData<JugadoraResponse?>()
@@ -63,16 +58,9 @@ class JugadoraViewModel(private val baskherRepository: BaskherRepository) : View
         }
     }
 
-
-
-
     // Cambia el título de la appbar
     fun setCurrentScreenTitle(title: String){
         _currentTitle.value = title
     }
 
-    // Notifica a la tab cuál ha de estar seleccionada
-    fun selectIndex(index: Int){
-        _selectedIndex.value = index
-    }
 }

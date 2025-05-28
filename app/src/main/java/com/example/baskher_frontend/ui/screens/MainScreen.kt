@@ -1,12 +1,11 @@
 package com.example.baskher_frontend.ui.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -24,18 +23,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.baskher_frontend.R
 import com.example.baskher_frontend.ui.models.NavItem
 import com.example.baskher_frontend.ui.theme.PurpleDark
 import com.example.baskher_frontend.ui.theme.PurpleMedium
 import com.example.baskher_frontend.ui.viewmodels.JugadoraViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 @OptIn(ExperimentalMaterial3Api::class)
-//@Preview
 @Composable
 fun MainScreen(modifier: Modifier = Modifier,
                viewModel: JugadoraViewModel,
-               navigateToDetail: (Int) -> Unit) {
+               navigateToDetail: (Int) -> Unit,
+               navController: NavHostController,
+               auth: FirebaseAuth
+) {
 
     val navItemList = listOf(
         NavItem("Estadísticas", R.drawable.baseline_bar_chart_24),
@@ -63,7 +66,14 @@ fun MainScreen(modifier: Modifier = Modifier,
                             imageVector = Icons.AutoMirrored.Filled.ExitToApp,
                             contentDescription = "Cerrar sesión",
                             tint = Color.White,
-                            modifier = Modifier.padding(end = 10.dp),
+                            modifier = Modifier
+                                .padding(end = 10.dp)
+                                .clickable {
+                                    auth.signOut() // Firebase logout
+                                    navController.navigate("initial") {
+                                        popUpTo("mainScreen") { inclusive = true }
+                                    }
+                                }
                         )
 
                 },

@@ -2,6 +2,7 @@ package com.example.baskher_frontend.ui.login
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,11 +25,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.baskher_frontend.R
 import com.example.baskher_frontend.ui.theme.PurpleBack
 import com.example.baskher_frontend.ui.theme.PurpleDark
@@ -37,7 +41,11 @@ import com.example.baskher_frontend.ui.theme.UnselectedField
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
-fun SignUpScreen(auth: FirebaseAuth, onSignUpSuccess:() -> Unit) {
+fun SignUpScreen(
+    auth: FirebaseAuth,
+    onSignUpSuccess:() -> Unit,
+    navController: NavHostController)
+{
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -45,7 +53,7 @@ fun SignUpScreen(auth: FirebaseAuth, onSignUpSuccess:() -> Unit) {
         modifier = Modifier
             .fillMaxSize()
             .background(Brush.verticalGradient(listOf(PurpleBack, PurpleDark)))
-            .padding(horizontal = 32.dp),
+            .padding(horizontal = 32.dp, vertical = 32.dp),
 
         ) {
 
@@ -55,8 +63,13 @@ fun SignUpScreen(auth: FirebaseAuth, onSignUpSuccess:() -> Unit) {
                 contentDescription = "",
                 tint = White,
                 modifier = Modifier
-                    .padding(vertical = 24.dp)
+                    .padding(top = 30.dp, bottom = 30.dp)
                     .size(24.dp)
+                    .clickable {
+                        navController.navigate("initial") {
+                            popUpTo("initial") { inclusive = true }
+                        }
+                    }
             )
             Spacer(modifier = Modifier.weight(1f))
         }
@@ -77,7 +90,9 @@ fun SignUpScreen(auth: FirebaseAuth, onSignUpSuccess:() -> Unit) {
             ),
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = UnselectedField,
-                focusedContainerColor = SelectedField
+                focusedContainerColor = SelectedField,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent
             )
         )
         Spacer(Modifier.height(48.dp))
@@ -96,8 +111,11 @@ fun SignUpScreen(auth: FirebaseAuth, onSignUpSuccess:() -> Unit) {
             ),
             colors = TextFieldDefaults.colors(
                 unfocusedContainerColor = UnselectedField,
-                focusedContainerColor = SelectedField
-            )
+                focusedContainerColor = SelectedField,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent
+            ),
+            visualTransformation = PasswordVisualTransformation()
         )
         Spacer(Modifier.height(48.dp))
         Button(
