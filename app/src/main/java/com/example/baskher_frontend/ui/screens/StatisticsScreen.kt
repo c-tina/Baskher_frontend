@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,7 +24,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -64,10 +64,6 @@ fun StatisticsScreen(
 
     val jugadoras by viewModel.jugadoras.collectAsState()
 
-    LaunchedEffect(Unit) {
-        viewModel.fetchJugadoras()
-    }
-
     val jugadorasOrdenadas = remember(opcionSeleccionada, jugadoras) {
         when (opcionSeleccionada) {
             "Puntos Totales" -> jugadoras.sortedByDescending { it.puntos_totales }
@@ -79,12 +75,17 @@ fun StatisticsScreen(
             else -> jugadoras
         }
     }
+    Box(
+        modifier = Modifier
+            .background(PurpleBack)
+            .fillMaxWidth()
+            .fillMaxHeight()
+    )
 
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(top = 110.dp, bottom = 16.dp)
-            .background(PurpleBack),
+            .padding(top = 110.dp, bottom = 16.dp),
 
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -161,28 +162,28 @@ fun StatisticsScreen(
         Row(
             modifier = Modifier
                 .fillMaxWidth(0.9f)
-                .padding(horizontal = 8.dp, vertical = 4.dp),
+                .padding(horizontal = 10.dp, vertical = 4.dp),
             horizontalArrangement = Arrangement.Start
         ) {
             Text(
                 text = "Nombre",
                 modifier = Modifier
-                    .weight(4f)
-                    .padding(start = 75.dp),
+                    .weight(5f),
                 color = PurpleDark,
                 fontWeight = FontWeight.Bold
             )
             Text(
                 text = "Equipo",
                 modifier = Modifier
-                    .weight(3f)
-                    .padding(start = 55.dp),
+                    .weight(2f)
+                    .padding(start = 10.dp),
                 color = PurpleDark,
                 fontWeight = FontWeight.Bold
             )
             Text(
                 text = "Total",
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f),
                 color = PurpleDark,
                 fontWeight = FontWeight.Bold
             )

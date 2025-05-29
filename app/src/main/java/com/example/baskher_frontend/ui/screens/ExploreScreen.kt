@@ -13,7 +13,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -37,10 +36,6 @@ fun ExploreScreen(
 
     val jugadoras by viewModel.jugadoras.collectAsState()
 
-    // Efecto para cargar las jugadoras al inicio
-    LaunchedEffect(Unit) {
-        viewModel.fetchJugadoras()
-    }
 
     val filteredJugadoras = jugadoras
         .filter { it.nombre.contains(searchQuery, ignoreCase = true) }

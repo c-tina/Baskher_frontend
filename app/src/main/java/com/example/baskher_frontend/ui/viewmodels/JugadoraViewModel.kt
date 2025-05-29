@@ -29,6 +29,7 @@ class JugadoraViewModel(private val baskherRepository: BaskherRepository) : View
 
     // Carga la lista de jugadoras desde la API
     fun fetchJugadoras() {
+        if (_jugadoras.value.isNotEmpty()) return
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = baskherRepository.getJugadorasFromAPI()

@@ -37,7 +37,7 @@ fun JugadoraStatistics(
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp, vertical = 4.dp)
+            .padding(vertical = 4.dp)
             .height(70.dp),
         colors = CardDefaults.elevatedCardColors(
             containerColor = PurpleDark,
@@ -64,7 +64,7 @@ fun JugadoraStatistics(
             Text(
                 text = formatearNombre(jugadora.nombre),
                 modifier = Modifier
-                    .weight(2f)
+                    .weight(5f)
                     .padding(start = 6.dp),
                 color = Color.White,
                 fontSize = 16.sp,
@@ -73,8 +73,7 @@ fun JugadoraStatistics(
             Text(
                 text = obtenerIniciales(jugadora.equipo),
                 modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 30.dp),
+                    .weight(2f),
                 color = Color.White,
                 fontSize = 14.sp,
             )
@@ -92,8 +91,7 @@ fun JugadoraStatistics(
             Text(
                 text = valor.toString(),
                 modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 30.dp),
+                    .weight(1f),
                 color = Color.White,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold
